@@ -1,0 +1,56 @@
+<mat-card>
+  <mat-card-header>Users</mat-card-header>
+  <mat-card-content>
+    <div class="user-container mat-elevation-z8">
+
+      <!-- <div class="example-header">
+        <mat-form-field>
+          <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+        </mat-form-field>
+      </div> -->
+
+      <mat-table #table [dataSource]="users">
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+            <a mat-button [routerLink]="['/user-edit', element.id]">{{element.name}}</a>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.email}} </mat-cell>
+        </ng-container>
+
+        <!-- Password Column -->
+        <ng-container matColumnDef="password">
+          <mat-header-cell *matHeaderCellDef> Password </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.password}} </mat-cell>
+        </ng-container>
+
+        <!-- Role Column -->
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.role}} </mat-cell>
+        </ng-container>
+
+        <!-- Apps Column -->
+        <ng-container matColumnDef="apps">
+          <mat-header-cell *matHeaderCellDef> Applications </mat-header-cell>
+          <!-- <mat-cell *matCellDef="let element"> {{element.apps}} </mat-cell> -->
+          <mat-cell *matCellDef="let element">
+            <span *ngFor="let app of element.apps; let isLast=last">{{app.appName}}{{isLast ? '' : ', '}}</span>
+          </mat-cell>
+        </ng-container>
+
+        <mat-header-row class="user-table-header" *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row  *matRowDef="let row; columns: displayedColumns">
+        </mat-row>
+      </mat-table>
+    </div>
+  </mat-card-content>
+  <button mat-raised-button color="primary" [routerLink]="['/user-add']">Add User</button>
+</mat-card>

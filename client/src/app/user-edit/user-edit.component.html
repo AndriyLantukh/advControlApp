@@ -1,0 +1,44 @@
+<mat-card>
+  <form #userForm="ngForm" (ngSubmit)="save(userForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{user.name ? 'Edit' : 'Add'}} User</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="user.id">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="user name" [(ngModel)]="user.name"
+                 required name="name" #name>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="email" [(ngModel)]="user.email"
+                 required name="email" #name>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="password" [(ngModel)]="user.password"
+                 required name="password" #name>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="user role" [(ngModel)]="user.role" required name="role" #name>
+            <mat-option *ngFor="let userRole of userRoles" [value]="userRole.value">
+               {{ userRole.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!userForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(user.id)"
+              *ngIf="user.id" type="button">Delete</button>
+      <a mat-button routerLink="/user-list">Cancel</a>
+    </mat-card-actions>
+  </form>
+</mat-card>

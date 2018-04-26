@@ -1,0 +1,50 @@
+<mat-card>
+  <form #appForm="ngForm" (ngSubmit)="save(appForm.value)">
+    <mat-card-header>
+      <mat-card-title><h2>{{app.name ? 'Edit' : 'Add'}} Application</h2></mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <input type="hidden" name="id" [(ngModel)]="app.id">
+      <div>
+        <mat-form-field>
+          <input matInput placeholder="application name" [(ngModel)]="app.appName"
+                 required name="appName" #name>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field>
+          <mat-select placeholder="Application type" [(ngModel)]="app.appType" required name="appType" #name>
+            <mat-option *ngFor="let appType of appTypes" [value]="appType.value">
+               {{ appType.value }}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+      <div>
+        <!-- <mat-form-field>
+          <mat-select placeholder="Content types" [formControl]="contentTypes" name="contentTypes" multiple>
+            <mat-select-trigger>
+               {{contentTypes.value ? contentTypes.value[0] : ''}}
+               <span *ngIf="contentTypes.value?.length > 1" class="example-additional-selection">
+               (+{{contentTypes.value.length - 1}} others)
+               </span>
+            </mat-select-trigger>
+        <mat-option *ngFor="let contentType of contentTypeList" [value]="contentType">{{contentType}}</mat-option>
+      </mat-select>
+     </mat-form-field> -->
+        <mat-form-field>
+         <mat-select placeholder="Content types" [formControl]="contentTypes" name="contentTypes" multiple>
+           <mat-option *ngFor="let contentType of contentTypeList" [value]="contentType">{{contentType}}</mat-option>
+         </mat-select>
+       </mat-form-field>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-raised-button color="primary" type="submit"
+              [disabled]="!appForm.form.valid">Save</button>
+      <button mat-raised-button color="secondary" (click)="remove(app.id)"
+              *ngIf="app.id" type="button">Delete</button>
+      <a mat-button routerLink="/app-list">Cancel</a>
+    </mat-card-actions>
+  </form>
+</mat-card>
