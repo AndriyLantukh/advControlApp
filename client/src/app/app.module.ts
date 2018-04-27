@@ -25,7 +25,7 @@ import { LoginComponent } from './login/login.component';
 
 
 const appRoutes: Routes = [
-  { path: '', pathMatch: 'full', redirectTo: '/home' },
+  { path: '', pathMatch: 'full', redirectTo: '/login' },
 //  { path: '**', redirectTo: '' },
   { path: 'login', component: LoginComponent },
   { path: 'user-list', component: UserListComponent, canActivate: [AuthGuard]},
